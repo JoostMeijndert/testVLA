@@ -1,4 +1,4 @@
-table{
+table {
     border-collapse: collapse;
     width: 100%;
     color: #000000FF;
@@ -8,15 +8,15 @@ table{
     border: 2px solid black;
 }
 
-tr{
+tr {
     border: 1px solid black;
 }
 
-td{
+td {
     border: 1px solid black;
 }
 
-th{
+th {
     border: 2px solid black;
     background-color: aliceblue;
 }
