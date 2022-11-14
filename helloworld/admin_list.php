@@ -8,8 +8,6 @@
 <nav>
     <a href="index.php">Home</a>
 
-    <a href="admin_list.php">Admin list</a>
-
     <a href="">uiloggen</a>
 </nav>
 <table>
@@ -19,6 +17,8 @@
         <th>Naam</th>
         <th>Geboortedatum</th>
         <th>Geslacht</th>
+        <th></th>
+        <th>"delete"</th>
     </tr>
 
     <?php
@@ -40,6 +40,12 @@
                   <td>" . $row["Naam"] . "</td>
                   <td>" . $row["Geboortedatum"] . "</td>
                   <td>" . $row["geslacht"] . "</td>
+                  <td>
+                        <a href='AanpasenTabel.php'>Aanpassen</a>
+                  </td>
+                  <td>
+                        <a href='AanpasenTabel.php'>'delete'</a>
+                  </td>
                   </tr>";
         }
     } else {
