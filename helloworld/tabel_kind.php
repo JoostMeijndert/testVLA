@@ -11,6 +11,8 @@
     <a href="admin_list.php">Admin list</a>
 
     <a href="">uiloggen</a>
+
+    <a href="">verschillende tabellen</a>
 </nav>
 <table>
     <tr>

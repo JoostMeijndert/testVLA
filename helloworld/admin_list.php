@@ -1,66 +1,67 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Tabel met inhoud</title>
-    <link rel="stylesheet" href="/Styles/tabelscreen.css">
+    <title>Admin page</title>
+    <link rel="stylesheet" href="/Styles/admin_page.css">
+
 </head>
 <body>
 <nav>
     <a href="index.php">Home</a>
+    <a href="tabel_kind.php">terug</a>
+    <a href="">andere tabellen</a>
+    <a href="">uitloggen</a>
 
-    <a href="">uiloggen</a>
 </nav>
-<table>
-    <tr>
-        <th>id_Client</th>
-        <th>id_Kind</th>
-        <th>Naam</th>
-        <th>Geboortedatum</th>
-        <th>Geslacht</th>
-        <th></th>
-        <th>"delete"</th>
-    </tr>
 
-    <?php
+<?php
 
-    $user = 'root';
-    $pass = '';
-    $db = 'testdb';
+//Conectie datavbaze
+$user = 'root';
+$pass = '';
+$db = 'testdb';
 
-    $db = new mysqli ('localhost', $user, $pass, $db) or die();
+$db = new mysqli ('localhost', $user, $pass, $db) or die();
 
-    $sql = "SELECT id_client, id_kind, Naam, Geboortedatum, geslacht from kinderen";
-    $result = $db->query($sql);
+//kijken in database en alle kind_ID laten zien
+$query = "SELECT * FROM kinderen";
+$result = mysqli_query($db, $query) or die('fout bij query');
 
-    if ($result->num_rows . 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>
-                  <td>" . $row["id_client"] . "</td>
-                  <td>" . $row["id_kind"] . "</td>
-                  <td>" . $row["Naam"] . "</td>
-                  <td>" . $row["Geboortedatum"] . "</td>
-                  <td>" . $row["geslacht"] . "</td>
-                  <td>
-                        <a href='AanpasenTabel.php'>Aanpassen</a>
-                  </td>
-                  <td>
-                        <a href='AanpasenTabel.php'>'delete'</a>
-                  </td>
-                  </tr>";
-        }
-    } else {
-        echo "</table>";
-    }
-    $db->close();
+//loop waar alle Kind_ID in beelt komen
+
+echo '<table>';
+
+while ($row = mysqli_fetch_array($result)) {
+
+    $client_id = $row['id_client'];
+    $kind_id = $row['Id_kind'];
+    $naam = $row['Naam'];
+    $geboortedatum = $row['Geboortedatum'];
+    $geslacht = $row['geslacht'];
+
+    echo '<tr>';
+    echo "<td>$client_id</td><td>$kind_id</td><td>$naam</td><td>$geboortedatum</td><td>$geslacht</td>";
+
+    echo '<td>';
+    echo '<a href="AanpasenTabel.php?id=' . $kind_id . '&id_client=' . $client_id . '&Naam=' . $naam . '&Geboortedatum=' . $geboortedatum . '&geslacht=' . $geslacht . '">"Aanpassen"</a>';
+    echo '</td>';
+
+    echo '<td>';
+    echo '<a href="delete.php?id=' . $kind_id . '">"delete"</a>';
+    echo '</td>';
+
+    echo '</tr>';
+
+}
+echo '</table>';
 
 
-    ?>
-</table>
+?>
 
-<br><button onclick="window.location.href='new.php'">Nieuw kiid</button>
-<br><br>
 
-<footer>
-</footer>
 </body>
 </html>
+
+<?php
+
+?>
