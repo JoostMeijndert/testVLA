@@ -21,13 +21,13 @@ $ClienID = $Naam = $geboortedatum = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["id_client"])) {
-        $ClienErr = "Name is required";
+        $ClienErr = "client ID is verplicht";
     } else {
         $ClientID = test_input($_POST["id_client"]);
     }
 
     if (empty($_POST["naam"])) {
-        $NaamErr = "Email is required";
+        $NaamErr = "NaAm in verplicht";
     } else {
         $Naam = test_input($_POST["naam"]);
     }
@@ -39,12 +39,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+else{
+
+    // data lezen
+    $id_client = $_POST['id_client'];
+    $id_kind = $_POST['id_kind'];
+    $naam = $_POST['naam'];
+    $gebootedatum = $_POST['Geboortedatum'];
+    $geslacht = $_POST['geslacht'];
+
+// data in database zetten
+    $dbc = mysqli_connect('localhost', 'root', '', 'testdb') or die('geen verbinding met database');
+
+    $query = "INSERT INTO kinderen VALUES ('$id_client', '', '$naam', '$gebootedatum', '$geslacht')";
+//, '$id_kind'
+
+
+    $result = mysqli_query($dbc,$query) or die('FOUT');
+
+    mysqli_close($dbc);
+
+// bevestigen in database
+    if ($result){
+        echo 'toevoegen gelukt';
+        header("location: tabel_kind.php");
+    }
+    else{
+        echo 'fouet opgetreden';
+    }
+
+
+}
+
+
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
 }
+
+
 ?>
 
 <h2>PHP Form Validation Example</h2>
@@ -53,10 +88,12 @@ function test_input($data) {
     Client_ID: <input type="text" name="id_client">
     <span class="error">* <?php echo $ClienErr;?></span>
     <br><br>
-    Naam: <input type="text" name="naam">
+    Naam:
+    <input type="text" name="naam">
     <span class="error">* <?php echo $NaamErr;?></span>
     <br><br>
-    Geboortedatum<input type="date" name="Geboortedatum">
+    Geboortedatum:
+    <input type="date" name="Geboortedatum">
     <span class="error"><?php echo $geboortedatumErr;?></span>
     <br><br>
     geslacht:

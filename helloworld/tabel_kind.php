@@ -3,17 +3,15 @@
 <head>
     <title>Tabel met inhoud</title>
     <link rel="stylesheet" href="/Styles/tabelscreen.css">
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 </head>
 <body>
 <nav>
-    <a href="index.php">Home</a>
-
-    <a href="admin_list.php">Admin list</a>
-
-    <a href="">uiloggen</a>
-
-    <a href="">verschillende tabellen</a>
+    <?php
+    include 'header.php';
+    ?>
 </nav>
+
 <table>
     <tr>
         <th>id_Client</th>

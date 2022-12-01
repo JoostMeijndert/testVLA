@@ -7,12 +7,12 @@
 </head>
 <body>
 <nav>
-    <a href="index.php">Home</a>
-    <a href="tabel_kind.php">terug</a>
-    <a href="">andere tabellen</a>
-    <a href="">uitloggen</a>
-
+    <?php
+    include 'header.php';
+    ?>
 </nav>
+
+<a href="tabel_kind.php">Terug</a>
 
 <?php
 
@@ -34,20 +34,20 @@ echo '<table>';
 while ($row = mysqli_fetch_array($result)) {
 
     $client_id = $row['id_client'];
-    $kind_id = $row['Id_kind'];
+    $id_kind = $row['Id_kind'];
     $naam = $row['Naam'];
     $geboortedatum = $row['Geboortedatum'];
     $geslacht = $row['geslacht'];
 
     echo '<tr>';
-    echo "<td>$client_id</td><td>$kind_id</td><td>$naam</td><td>$geboortedatum</td><td>$geslacht</td>";
+    echo "<td>$client_id</td><td>$id_kind</td><td>$naam</td><td>$geboortedatum</td><td>$geslacht</td>";
 
     echo '<td>';
-    echo '<a href="AanpasenTabel.php?id=' . $kind_id . '&id_client=' . $client_id . '&Naam=' . $naam . '&Geboortedatum=' . $geboortedatum . '&geslacht=' . $geslacht . '">"Aanpassen"</a>';
+    echo '<a href="AanpasenTabel.php?id=' . $id_kind . '&id_client=' . $client_id . '&Naam=' . $naam . '&Geboortedatum=' . $geboortedatum . '&geslacht=' . $geslacht . '">"Aanpassen"</a>';
     echo '</td>';
 
     echo '<td>';
-    echo '<a href="delete.php?id=' . $kind_id . '">"delete"</a>';
+    echo '<a href="delete.php?id=' . $id_kind . '">"delete"</a>';
     echo '</td>';
 
     echo '</tr>';
